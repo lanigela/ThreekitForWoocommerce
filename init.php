@@ -39,6 +39,9 @@ if (!function_exists('threekit_for_woocommerce_init')) {
 if (!function_exists('replace_product_template_with_clara')) {
   function replace_product_template_with_clara() {
     global $product;
+    $logger = wc_get_logger();
+    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+
     $logger->debug( 'Product id='.$product->get_id(), $context );
     foreach ( $attributes as $attribute_name => $options ) {
       $logger = wc_get_logger();
