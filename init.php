@@ -43,6 +43,8 @@ if (!function_exists('replace_product_template_with_clara')) {
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
 
     $logger->debug( 'Product id='.$product->get_id(), $context );
+
+    $attributes = $product->get_attributes()
     foreach ( $attributes as $attribute_name => $options ) {
       $logger = wc_get_logger();
       $context = array( 'source' => 'Threekit-for-WooCommerce' );
