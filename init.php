@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
   // Put your plugin code here
   add_action('init', 'threekit_for_woocommerce_init');
+  add_action('woocommerce_single_product_summary', 'replace_product_template_with_clara', 100);
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
@@ -32,7 +33,18 @@ if (!function_exists('threekit_for_woocommerce_init')) {
     // logger
     $logger = wc_get_logger();
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
-    $logger->debug( 'This is a test message', $context );
+  }
+}
+
+if (!function_exists('replace_product_template_with_clara')) {
+  function replace_product_template_with_clara() {
+    global $product;
+    $logger->debug( 'Product id='.$product->get_id(), $context );
+    foreach ( $attributes as $attribute_name => $options ) {
+      $logger = wc_get_logger();
+      $context = array( 'source' => 'Threekit-for-WooCommerce' );
+      $logger->debug( $attribute_name, $context );
+    }
   }
 }
 
