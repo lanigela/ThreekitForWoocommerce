@@ -23,12 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Check if WooCommerce is active
  **/
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-    // Put your plugin code here
+  // Put your plugin code here
+  // logger
+  $logger = wc_get_logger();
+  $context = array( 'source' => 'Threekit-for-WooCommerce' );
+  $logger->debug( 'This is a test message', $context );
 }
 
-// logger
-$logger = wc_get_logger();
-$context = array( 'source' => 'Threekit-for-WooCommerce' );
-$logger->debug( 'This is a test message', $context );
+
 
 ?>
