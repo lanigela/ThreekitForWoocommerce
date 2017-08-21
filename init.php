@@ -49,7 +49,7 @@ if (!function_exists('replace_product_template_with_clara')) {
       $logger = wc_get_logger();
       $context = array( 'source' => 'Threekit-for-WooCommerce' );
       $logger->debug( $attribute_name, $context );
-      $logger->debug( $options, $context );
+      $logger->debug( $options->get_slugs(), $context );
     }
   }
 }
