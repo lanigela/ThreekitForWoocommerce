@@ -24,12 +24,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  **/
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
   // Put your plugin code here
-  // logger
-  $logger = wc_get_logger();
-  $context = array( 'source' => 'Threekit-for-WooCommerce' );
-  $logger->debug( 'This is a test message', $context );
+  add_action('init', 'threekit_for_woocommerce_init');
 }
 
-
+if (!function_exists('threekit_for_woocommerce_init')) {
+  function threekit_for_woocommerce_init() {
+    // logger
+    $logger = wc_get_logger();
+    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+    $logger->debug( 'This is a test message', $context );
+  }
+}
 
 ?>
