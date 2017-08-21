@@ -6,9 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 class ThreeKit_Display {
-  function __construct() {
+
+  private $config;
+
+  public function __construct() {
 
   }
+
+
 }
 
 ?>
