@@ -53,7 +53,6 @@ class ThreeKit {
     wc_get_template('single-product/clara-player.php');
 
     // load clara scripts
-    wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
     $dataToBePassed = array(
       'clarauuid' => $this->clarauuid
@@ -76,7 +75,7 @@ class ThreeKit {
     remove_all_actions('woocommerce_before_single_product_summary');
     remove_all_actions('woocommerce_single_product_summary');
     // add clara player
-
+    wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
     add_action('woocommerce_before_single_product_summary', array($this, 'show_clara_player'));
   }
 
