@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
   // Put your plugin code here
   add_action('init', 'threekit_for_woocommerce_init');
-  add_action('woocommerce_single_product_summary', 'enable_threekit_by_checking_clarauuid_attribute', 100);
+  add_action('woocommerce_before_single_product', 'enable_threekit_by_checking_clarauuid_attribute', 100);
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
