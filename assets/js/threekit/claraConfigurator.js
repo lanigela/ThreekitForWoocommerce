@@ -2,7 +2,7 @@
   "use strict";
 
   var clara = claraplayer('clara-player');
-  var panelControl = document.getElementById('panelControl');
+  var panelControl = document.getElementById('panel-container');
   var customDiv = document.getElementById('panel-embed');
 
   clara.on('loaded', function() {
