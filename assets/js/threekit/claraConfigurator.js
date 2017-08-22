@@ -1,26 +1,26 @@
 (function() {
   "use strict";
 
-  var clara = claraplayer('clara-player');
-  var panelControl = document.getElementById('panel-container');
-  var customDiv = document.getElementById('panel-embed');
-
-  clara.on('loaded', function() {
-    panelControl.onchange = changeHandler;
-
-    clara.configuration.initConfigurator({
-      el    : customDiv
-    });
-  });
-
-  function changeHandler(ev) {
-    clara.configuration.initConfigurator({
-      el:  customDiv
-    });
-    customDiv.style.display = 'block';
-  }
+  var api = claraplayer('clara-player');
+  var claraSceneId = php_vars.clarauuid;
+  var configuratorEl = document.getElementById('panel-embed');
+  var configuratorForm = "All";
 
   // Fetch and initialize the sceneId
-  clara.sceneIO.fetchAndUse(php_vars.clarauuid);
+  api.sceneIO
+    .fetchAndUse(claraSceneId, null, { waitForPublish: true })
+    .then(() => {
+      const configuration = loadConfiguration();
+
+      if (configuratorForm && configuratorEl) {
+        api.configuration.initConfigurator({
+          id: claraSceneId,
+          form: configuratorForm,
+          el: configuratorEl
+        });
+
+        //api.on('configurationChange', onConfigurationChange({ api }));
+      }
+    });
 
 }());
