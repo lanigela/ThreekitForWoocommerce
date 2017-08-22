@@ -51,7 +51,9 @@ class ThreeKit {
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
     $logger->debug( 'Showing clara player', $context );
     $logger->debug( rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/clara-player.php', $context );
-    wc_get_template( 'single-product/product-image.php' );
+    $template_path = locate_template('clara-player.php');
+    $logger->debug($template_path, $context);
+    load_template($template_path);
     //wc_get_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/clara-player.php');
 
     // load scripts to init clara player
