@@ -51,6 +51,14 @@ class ThreeKit {
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
     $logger->debug( 'Showing clara player', $context );
     wc_get_template('single-product/clara-player.php');
+
+    // load clara scripts
+    wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
+    wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
+    $dataToBePassed = array(
+      'clarauuid' => $this->clarauuid
+    );
+    wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
   }
 
   public function show_clara_configurator() {
@@ -68,12 +76,7 @@ class ThreeKit {
     remove_all_actions('woocommerce_before_single_product_summary');
     remove_all_actions('woocommerce_single_product_summary');
     // add clara player
-    wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
-    wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
-    $dataToBePassed = array(
-      'clarauuid' => $this->clarauuid
-    );
-    wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
+
     add_action('woocommerce_before_single_product_summary', array($this, 'show_clara_player'));
   }
 
