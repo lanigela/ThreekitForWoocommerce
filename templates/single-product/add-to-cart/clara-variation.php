@@ -14,5 +14,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div id="panel-container">
-  <div id="panel-embed"></div>
+  <div id="panel-embed" style="width:50%"></div>
 </div>

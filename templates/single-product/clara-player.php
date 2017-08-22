@@ -13,4 +13,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="woocommerce-product-gallery" id="clara-player" style="height:400px"></div>
+<div class="woocommerce-product-gallery" id="clara-player" style="height:600px"></div>
