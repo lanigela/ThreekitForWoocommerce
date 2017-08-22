@@ -10,7 +10,6 @@
   api.sceneIO
     .fetchAndUse(claraSceneId, null, { waitForPublish: true })
     .then(() => {
-      const configuration = loadConfiguration();
 
       if (configuratorForm && configuratorEl) {
         api.configuration.initConfigurator({
