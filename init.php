@@ -30,7 +30,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 if (!function_exists('threekit_for_woocommerce_init')) {
   function threekit_for_woocommerce_init() {
-    require_once THREEKIT_FOR_WOOCOMMERCE_DIR . 'class-ThreeKit.php';
+    require_once THREEKIT_FOR_WOOCOMMERCE_DIR . '/class-ThreeKit.php';
     $api = new ThreeKit();
 
     add_action('woocommerce_before_single_product', array($api, 'enable_threekit_by_checking_clarauuid_attribute'));
