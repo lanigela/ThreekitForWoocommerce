@@ -69,7 +69,7 @@ class ThreeKit {
     remove_all_actions('woocommerce_single_product_summary');
     // add clara player
     wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
-    wp_enqueue_script( 'claraConfigurator', WC()->plugin_url() . 'assets/js/threekit/claraConfigurator.js');
+    wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_path(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
     $dataToBePassed = array(
       'clarauuid' => $this->clarauuid
     );
