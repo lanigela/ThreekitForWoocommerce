@@ -13,18 +13,8 @@ global $product;
 
 class ThreeKit {
 
-
   public function __construct() {
 
-  }
-
-  /* Rearrange templates by modifying hook
-  *  woocommerce_before_single_product_summary
-  *  woocommerce_single_product_summary
-  */
-  function replace_product_template_with_clara() {
-    remove_all_actions('woocommerce_before_single_product_summary');
-    remove_all_actions('woocommerce_single_product_summary');
   }
 
   public function enable_threekit_by_checking_clarauuid_attribute() {
@@ -46,10 +36,35 @@ class ThreeKit {
         $uuid = $product->get_attribute($attribute_name);
         if (!empty($uuid)) {
           $logger->debug( "Threekit plugin enabled", $context );
-          replace_product_template_with_clara();
+          $this->replace_product_template_with_clara();
         }
       }
     }
+  }
+
+/*********** Internal Functions *****************/
+
+  /* Rearrange templates by modifying hook
+  *  woocommerce_before_single_product_summary
+  *  woocommerce_single_product_summary
+  */
+  protected function replace_product_template_with_clara() {
+    // remove existing contents
+    remove_all_actions('woocommerce_before_single_product_summary');
+    remove_all_actions('woocommerce_single_product_summary');
+    // add clara player
+    add_action('woocommerce_before_single_product_summary', array($this, 'show_clara_player'));
+  }
+
+  protected function show_clara_player() {
+    $logger = wc_get_logger();
+    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+    $logger->debug( 'Showing clara player', $context );
+    wc_get_template('single-product/clara-player.php');
+  }
+
+  protected function show_clara_configurator() {
+    wc_get_template('single-product/add-to-cart/clara-variation.php');
   }
 }
 
