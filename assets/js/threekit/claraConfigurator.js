@@ -4,7 +4,7 @@
   var api = claraplayer('clara-player');
   var claraSceneId = php_vars.clarauuid;
   var configuratorEl = document.getElementById('panel-embed');
-  var configuratorForm = "All";
+  var configuratorForm = "Form1";
 
   // Fetch and initialize the sceneId
   api.sceneIO
