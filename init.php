@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
   // Put your plugin code here
   add_action('init', 'threekit_for_woocommerce_init');
-  add_action('woocommerce_single_product_summary', 'replace_product_template_with_clara', 100);
+  add_action('woocommerce_single_product_summary', 'enable_clara_by_checking_clarauuid_attribute', 100);
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
@@ -36,8 +36,19 @@ if (!function_exists('threekit_for_woocommerce_init')) {
   }
 }
 
+/* Rearrange templates by modifying hook
+*  woocommerce_before_single_product_summary
+*  woocommerce_single_product_summary
+*/
 if (!function_exists('replace_product_template_with_clara')) {
   function replace_product_template_with_clara() {
+    remove_all_actions('woocommerce_before_single_product_summary');
+    remove_all_actions('woocommerce_single_product_summary');
+  }
+}
+
+if (!function_exists('enable_clara_by_checking_clarauuid_attribute')) {
+  function enable_clara_by_checking_clarauuid_attribute() {
     global $product;
     $logger = wc_get_logger();
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
@@ -50,6 +61,14 @@ if (!function_exists('replace_product_template_with_clara')) {
       $context = array( 'source' => 'Threekit-for-WooCommerce' );
       $logger->debug( $attribute_name, $context );
       $logger->debug( $product->get_attribute($attribute_name), $context );
+
+      // enable clara player and configurator when attribute clarauuid exist
+      if (!strcmp($attribute_name, 'clarauuid')) {
+        $uuid = $product->get_attribute($attribute_name);
+        if (!empty($uuid)) {
+          replace_product_template_with_clara();
+        }
+      }
     }
   }
 }
