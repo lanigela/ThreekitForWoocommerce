@@ -17,6 +17,8 @@ class ThreeKit {
 
   }
 
+  /*********** Callback Functions *****************/
+
   public function enable_threekit_by_checking_clarauuid_attribute() {
     global $product;
     $logger = wc_get_logger();
@@ -42,7 +44,18 @@ class ThreeKit {
     }
   }
 
-/*********** Internal Functions *****************/
+  public function show_clara_player() {
+    $logger = wc_get_logger();
+    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+    $logger->debug( 'Showing clara player', $context );
+    wc_get_template('single-product/clara-player.php');
+  }
+
+  public function show_clara_configurator() {
+    wc_get_template('single-product/add-to-cart/clara-variation.php');
+  }
+
+  /*********** Internal Functions *****************/
 
   /* Rearrange templates by modifying hook
   *  woocommerce_before_single_product_summary
@@ -56,16 +69,7 @@ class ThreeKit {
     add_action('woocommerce_before_single_product_summary', array($this, 'show_clara_player'));
   }
 
-  protected function show_clara_player() {
-    $logger = wc_get_logger();
-    $context = array( 'source' => 'Threekit-for-WooCommerce' );
-    $logger->debug( 'Showing clara player', $context );
-    wc_get_template('single-product/clara-player.php');
-  }
 
-  protected function show_clara_configurator() {
-    wc_get_template('single-product/add-to-cart/clara-variation.php');
-  }
 }
 
 ?>
