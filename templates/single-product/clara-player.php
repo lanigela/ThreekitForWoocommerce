@@ -13,5 +13,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="" id="clara-player" style="height:400px">
+<div class="" id="clara-player" style="height:100px">
 </div>
