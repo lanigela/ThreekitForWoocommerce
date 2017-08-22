@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
   // Put your plugin code here
   add_action('init', 'threekit_for_woocommerce_init');
-  add_action('woocommerce_single_product_summary', 'enable_clara_by_checking_clarauuid_attribute', 100);
+  add_action('woocommerce_single_product_summary', 'enable_threekit_by_checking_clarauuid_attribute', 100);
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
@@ -47,8 +47,8 @@ if (!function_exists('replace_product_template_with_clara')) {
   }
 }
 
-if (!function_exists('enable_clara_by_checking_clarauuid_attribute')) {
-  function enable_clara_by_checking_clarauuid_attribute() {
+if (!function_exists('enable_threekit_by_checking_clarauuid_attribute')) {
+  function enable_threekit_by_checking_clarauuid_attribute() {
     global $product;
     $logger = wc_get_logger();
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
@@ -63,9 +63,10 @@ if (!function_exists('enable_clara_by_checking_clarauuid_attribute')) {
       $logger->debug( $product->get_attribute($attribute_name), $context );
 
       // enable clara player and configurator when attribute clarauuid exist
-      if (!strcmp($attribute_name, 'clarauuid')) {
+      if (!strcmp($attribute_name, 'pa_clarauuid')) {
         $uuid = $product->get_attribute($attribute_name);
         if (!empty($uuid)) {
+          $logger->debug( "Threekit plugin enabled", $context );
           replace_product_template_with_clara();
         }
       }
