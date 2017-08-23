@@ -74,7 +74,7 @@ class ThreeKit {
     // add clara player
     wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
     add_action('woocommerce_before_single_product_summary', array($this, 'show_clara_player'));
-    add_action('woocommerce_single_product_summary', array($this, 'show_clara_configurator'));
+    //add_action('woocommerce_single_product_summary', array($this, 'show_clara_configurator'));
   }
 
 
