@@ -43,6 +43,12 @@ class ThreeKit {
         }
       }
     }
+
+    $variations = $product->get_available_variations();
+    foreach ( $variations as $vname => $voptions) {
+      $logger->debug('Variation ' . $vname, $context);
+      $logger->debug($voptions, $context);
+    }
   }
 
   public function embed_clara_player() {
