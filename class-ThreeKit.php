@@ -30,10 +30,6 @@ class ThreeKit {
 
     $attributes = $product->get_attributes();
     foreach ( $attributes as $attribute_name => $options ) {
-
-      $logger->debug( $attribute_name, $context );
-      $logger->debug( $product->get_attribute($attribute_name), $context );
-
       // enable clara player and configurator when attribute clarauuid exist
       if (!strcmp($attribute_name, 'pa_clarauuid')) {
         $this->clarauuid = $product->get_attribute($attribute_name);
@@ -44,10 +40,11 @@ class ThreeKit {
       }
     }
 
+
+    // generate varations JSON config
     $variations = $product->get_available_variations();
-    foreach ( $variations as $vname => $voptions) {
-      $logger->debug('Variation ' . $vname, $context);
-      $logger->debug($voptions, $context);
+    foreach ( $variations as $voption) {
+      $logger->debug('Variation ' . print_r($voptions), $context);
     }
   }
 
