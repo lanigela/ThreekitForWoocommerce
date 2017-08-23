@@ -26,13 +26,16 @@ class claraConfigurator {
       .fetchAndUse(this.claraSceneId, null, { waitForPublish: true })
       .then(() => {
 
+        // use the first form in the scene
         self._getConfiguratorForm();
 
-        if (self.configuratorForm && self.configuratorEl) {
+        var configuratorEl = document.getElementById(self.configuratorDivId);
+
+        if (self.configuratorForm && configuratorEl) {
           self.api.configuration.initConfigurator({
             id    : self.claraSceneId,
             form  : self.configuratorForm,
-            el    : self.configuratorEl
+            el    : configuratorEl
           });
 
           //api.on('configurationChange', onConfigurationChange({ api }));
