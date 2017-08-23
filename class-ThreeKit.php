@@ -44,7 +44,7 @@ class ThreeKit {
     // generate varations JSON config
     $variations = $product->get_available_variations();
     foreach ( $variations as $voption) {
-      $logger->debug('Variation ' . print_r($voptions), $context);
+      $logger->debug('Variation ' . print_r($voption), $context);
     }
   }
 
