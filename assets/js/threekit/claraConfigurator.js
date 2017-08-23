@@ -44,7 +44,7 @@ class claraConfigurator {
     if (!this.api) {
       return;
     }
-    var forms = api.configuration.getForms();
+    var forms = this.api.configuration.getForms();
     if (forms.length > 0) {
       this.configuratorForm = forms[0].name;
     }
