@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div style="display: flex;">
-  <div id="panel-container" style="width: 25%">
+  <div id="panel-container" style="width: 80%">
     <div id="panel-embed"></div>
   </div>
-  <div id="threekit-add-to-cart" style=""></div>
+  <div id="threekit-add-to-cart" style="width: 20"></div>
 </div>
