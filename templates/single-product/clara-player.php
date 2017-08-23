@@ -12,9 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div style="display: flex;">
-<div class="woocommerce-product-gallery" id="clara-player" style="width:70%;height:600px"></div>
-<div id="panel-container" style="width: 25%">
-  <div id="panel-embed"></div>
-</div>
-</div>
+
+<div class="woocommerce-product-gallery" id="clara-player" style="height:600px"></div>
+
+

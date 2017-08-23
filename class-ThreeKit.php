@@ -46,8 +46,12 @@ class ThreeKit {
     }
   }
 
-  public function embed_clara_configurator() {
+  public function embed_clara_player() {
     load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/clara-player.php');
+  }
+
+  public function embed_clara_configurator() {
+    load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
 
     // load scripts to init clara player
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
@@ -55,10 +59,6 @@ class ThreeKit {
       'clarauuid' => $this->clarauuid
     );
     wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
-  }
-
-  public function show_add_to_cart() {
-    load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
   }
 
   /*********** Internal Functions *****************/
@@ -73,8 +73,8 @@ class ThreeKit {
     remove_all_actions('woocommerce_single_product_summary');
     // add clara player
     wp_enqueue_script( 'claraplayer', 'https://clara.io/js/claraplayer.min.js');
-    add_action('woocommerce_before_single_product_summary', array($this, 'embed_clara_configurator'));
-    add_action('woocommerce_single_product_summary', array($this, 'show_add_to_cart'));
+    add_action('woocommerce_before_single_product_summary', array($this, 'embed_clara_player'), 40);
+    add_action('woocommerce_before_single_product_summary', array($this, 'embed_clara_configurator'), 50);
   }
 
 
