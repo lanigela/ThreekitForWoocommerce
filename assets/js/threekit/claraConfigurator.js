@@ -58,7 +58,7 @@ class claraConfigurator {
   var opts = {
     playerDivId       : 'clara-player',
     claraSceneId      : php_vars.clarauuid,
-    configuratorDivId : document.getElementById('panel-embed')
+    configuratorDivId : 'panel-embed'
   };
   var cc = new claraConfigurator(opts);
 
