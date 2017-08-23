@@ -1,15 +1,5 @@
 "use strict";
 
-(function() {
-  var opts = {
-    playerDivId       : 'clara-player',
-    claraSceneId      : php_vars.clarauuid,
-    configuratorDivId : document.getElementById('panel-embed')
-  };
-  var cc = new claraConfigurator(opts);
-
-}());
-
 class claraConfigurator {
   constructor(config) {
     this.api                = null;
@@ -60,3 +50,13 @@ class claraConfigurator {
     }
   }
 }
+
+(function() {
+  var opts = {
+    playerDivId       : 'clara-player',
+    claraSceneId      : php_vars.clarauuid,
+    configuratorDivId : document.getElementById('panel-embed')
+  };
+  var cc = new claraConfigurator(opts);
+
+}());
