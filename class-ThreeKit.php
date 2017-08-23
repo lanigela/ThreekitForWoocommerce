@@ -30,8 +30,7 @@ class ThreeKit {
 
     $attributes = $product->get_attributes();
     foreach ( $attributes as $attribute_name => $options ) {
-      $logger = wc_get_logger();
-      $context = array( 'source' => 'Threekit-for-WooCommerce' );
+
       $logger->debug( $attribute_name, $context );
       $logger->debug( $product->get_attribute($attribute_name), $context );
 
