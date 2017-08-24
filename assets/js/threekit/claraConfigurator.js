@@ -51,7 +51,7 @@ class claraConfigurator {
             el    : configuratorEl
           });
 
-          api.on('configurationChange', self._onConfigurationChange());
+          self.api.on('configurationChange', self._onConfigurationChange());
         }
       });
   }
@@ -67,7 +67,6 @@ class claraConfigurator {
   }
 
   _onConfigurationChange() {
-    var self = this;
     var config = this.api.configuration.getConfiguration();
     console.log(config);
 
