@@ -100,7 +100,7 @@ class claraConfigurator {
         }
         if (this.ignoreCaseStrcmp(trimEle, key)) {
           found = true;
-          if (!this.attributes[ele].includes(config[key])) {
+          if (!this.ignoreCaseIncludes(this.attributes[ele], config[key])) {
             // config attribute value is illegal
             legal = false;
           }
@@ -145,6 +145,15 @@ class claraConfigurator {
   */
   ignoreCaseStrcmp(str1, str2) {
     return str1.toLowerCase() === str2.toLowerCase();
+  }
+  ignoreCaseIncludes(arr, ele) {
+    var self = this;
+    arr.forEach( (arrEle) => {
+      if (self.ignoreCaseStrcmp(arrEle, ele)) {
+        return true;
+      }
+    });
+    return false;
   }
 }
 
