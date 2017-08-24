@@ -148,8 +148,8 @@ class claraConfigurator {
   }
   ignoreCaseIncludes(arr, ele) {
     var self = this;
-    arr.forEach( (arrEle) => {
-      if (self.ignoreCaseStrcmp(arrEle, ele)) {
+    for (var iter in arr) {
+      if (self.ignoreCaseStrcmp(arr[iter], ele)) {
         return true;
       }
     });
