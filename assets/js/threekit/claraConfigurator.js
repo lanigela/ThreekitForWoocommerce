@@ -8,6 +8,8 @@ class claraConfigurator {
     this.configuratorDivId      = null;
     this.configuratorInputDivId = null;
     this.configuratorForm       = null;
+    this.addtocartClassName     = null;
+    this.addtocartButton        = null;
     /*
     *
     */
@@ -25,6 +27,9 @@ class claraConfigurator {
       this.attributes             = config.attributes;
       this.available_attributes   = config.available_attributes;
       this.configuratorInputDivId = config.configuratorInputDivId;
+      this.addtocartClassName     = config.addtocartClassName;
+
+      this.addtocartButton = document.getElementByClassName(this.addtocartClassName)[0];
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
@@ -69,6 +74,7 @@ class claraConfigurator {
   }
 
   _onConfigurationChange() {
+    var self = this;
     var config = this.api.configuration.getConfiguration();
     console.log(config);
 
@@ -77,11 +83,77 @@ class claraConfigurator {
       return;
     }
 
+    // check if config attribute name and value exist for the current product
+    var additionalAttrs = [];
+    var attribute_keys = this.attributes.keys();
+    var config_keys = cofig.keys();
+
+    if (cofig_keys.length < attribute_keys.length) {
+      console.warn("Threekit attribute number is smaller than in WooCommerce, product will not be able to added to cart");
+    }
+    for (var key in config) {
+      // looking for "key" in attribute_keys
+      var found = false;
+      var legal = true;
+      attribute_keys.forEach( (ele) => {
+        // remove "pa_"
+        var trimEle = ele;
+        if (trimEle.startsWith('pa_')) {
+          trimEle = trimEle.substr(3);
+        }
+        if (self.ignoreCaseStrcmp(trimEle, key)) {
+          found = true;
+          if (!self.attributes[ele].includes(config[key])) {
+            // config attribute value is illegal
+            legal = false;
+          }
+          break;
+        }
+      });
+      if (!legal) {
+        self._disableAddtocartButton();
+        return;
+      }
+      if (!found) {
+        // additional attributes will be posted to server as text
+        additionalAttrs.push(key);
+      }
+    }
+    /*
+    *  Check if the product is available
+    *  Attributes in WooCommerce can be overlapping,
+    *  using the first matching attribute in this.available_attributes
+    */
+
+    // calculate price
+
+  }
+
+  _disableAddtocartButton() {
+    if (!this.addtocartButton) {
+      return;
+    }
+    this.addtocartButton.classList.add('disabled');
+  }
+
+  _enableAddtocartButton() {
+    if (!this.addtocartButton) {
+      return;
+    }
+    this.addtocartButton.classList.remove('disabled');
+  }
+
+  /*
+  * Utility functions
+  */
+  ignoreCaseStrcmp(str1, str2) {
+    return str1.toLowerCase() === str2.toLowerCase();
   }
 }
 
 (function() {
   var opts = {
+    addtocartClassName    : 'single_add_to_cart_button',
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
     configuratorInputDivId: 'threekit-add-to-cart-inputs',
