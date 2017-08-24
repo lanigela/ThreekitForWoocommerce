@@ -95,7 +95,7 @@ class claraConfigurator {
       // looking for "key" in attribute_keys
       var found = false;
       var legal = true;
-      for (ele in attribute_keys) {
+      for (var ele in attribute_keys) {
         // remove "pa_"
         var trimEle = ele;
         if (trimEle.startsWith('pa_')) {
