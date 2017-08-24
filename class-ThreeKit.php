@@ -30,7 +30,15 @@ class ThreeKit {
 
     $logger->debug( 'Product id='.$product->get_id(), $context );
 
+    $product_type = $product->get_type();
+
+    // only works for variable product for now
+    if (strcmp($product_type, 'variable')) {
+      return;
+    }
+
     $attributes = $product->get_attributes();
+
     foreach ( $attributes as $attribute_name => $options ) {
       // enable clara player and configurator when attribute clarauuid exist
       if (!strcmp($attribute_name, 'pa_clarauuid')) {
