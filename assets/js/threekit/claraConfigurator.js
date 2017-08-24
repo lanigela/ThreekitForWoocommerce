@@ -2,21 +2,24 @@
 
 class claraConfigurator {
   constructor(config) {
-    this.api                = null;
-    this.claraSceneId       = null;
-    this.playerDivId        = null;
-    this.configuratorDivId  = null;
-    this.configuratorForm   = null;
-    this.variations         = null;
+    this.api                  = null;
+    this.claraSceneId         = null;
+    this.playerDivId          = null;
+    this.configuratorDivId    = null;
+    this.configuratorForm     = null;
+    this.attributes           = null;
+    this.available_attributes = null;
 
     if (config) {
       // init variables
       this.playerDivId          = config.playerDivId;
       this.configuratorDivId    = config.configuratorDivId;
       this.claraSceneId         = config.claraSceneId;
-      this.variations           = config.variations;
+      this.attributes           = config.attributes;
+      this.available_attributes = config.available_attributes;
     }
-    console.log(this.variations);
+    console.log(this.attributes);
+    console.log(this.available_attributes);
     this._initClara();
   }
 
@@ -58,10 +61,11 @@ class claraConfigurator {
 
 (function() {
   var opts = {
-    playerDivId       : 'clara-player',
-    configuratorDivId : 'panel-embed',
-    claraSceneId      : php_vars.clarauuid,
-    variations        : php_vars.variations
+    playerDivId           : 'clara-player',
+    configuratorDivId     : 'panel-embed',
+    claraSceneId          : php_vars.clarauuid,
+    available_attributes  : php_vars.available_attributes,
+    attributes            : php_vars.attributes;
   };
   var cc = new claraConfigurator(opts);
 

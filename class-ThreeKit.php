@@ -15,6 +15,7 @@ class ThreeKit {
 
   protected $clarauuid;
   protected $JSONConfig;
+  protected $attributes;
 
   public function __construct() {
 
@@ -39,6 +40,7 @@ class ThreeKit {
 
           // generate varations JSON config
           $this->JSONConfig = $this->variation_attributes_to_JSON($product->get_available_variations());
+          $this->attributes = $product->get_variation_attributes();
           // load template
           $this->replace_product_template_with_clara();
         }
@@ -59,8 +61,10 @@ class ThreeKit {
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
     $dataToBePassed = array(
       'clarauuid' => $this->clarauuid,
-      'variations' => $this->JSONConfig
+      'available_attributes' => $this->JSONConfig,
+      'attributes' => $this->attributes
     );
+    // variables will be json encoded here
     wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
   }
 
