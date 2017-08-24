@@ -14,6 +14,7 @@ global $product;
 class ThreeKit {
 
   protected $clarauuid;
+  protected $JSONConfig;
 
   public function __construct() {
 
@@ -35,20 +36,16 @@ class ThreeKit {
         $this->clarauuid = $product->get_attribute($attribute_name);
         if (!empty($this->clarauuid)) {
           $logger->debug( "Threekit plugin enabled", $context );
+
+          // generate varations JSON config
+          $this->JSONConfig = $this->variation_attributes_to_JSON($product->get_available_variations());
+          // load template
           $this->replace_product_template_with_clara();
         }
       }
     }
 
 
-    // generate varations JSON config
-    $variations = $product->get_available_variations();
-    $test = $product->get_variation_attributes();
-    $logger->debug(var_dump($variations), $context);
-    $logger->debug(var_dump($test), $context);
-    /*foreach ( $variations as $voption) {
-      $logger->debug('Variation ' . print_r($voption), $context);
-    }*/
   }
 
   public function embed_clara_player() {
@@ -61,7 +58,8 @@ class ThreeKit {
     // load scripts to init clara player
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
     $dataToBePassed = array(
-      'clarauuid' => $this->clarauuid
+      'clarauuid' => $this->clarauuid,
+      'variations' => $this->JSONConfig
     );
     wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
   }
@@ -82,7 +80,10 @@ class ThreeKit {
     add_action('woocommerce_before_single_product_summary', array($this, 'embed_clara_configurator'), 50);
   }
 
-
+  // convert $product->get_variation_attributes() to JSON
+  protected function variation_attributes_to_JSON($variations) {
+    return $variations;
+  }
 }
 
 ?>

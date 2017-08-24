@@ -7,14 +7,16 @@ class claraConfigurator {
     this.playerDivId        = null;
     this.configuratorDivId  = null;
     this.configuratorForm   = null;
+    this.variations         = null;
 
     if (config) {
       // init variables
       this.playerDivId          = config.playerDivId;
-      this.claraSceneId         = config.claraSceneId;
       this.configuratorDivId    = config.configuratorDivId;
+      this.claraSceneId         = config.claraSceneId;
+      this.variations           = config.variations;
     }
-
+    console.log(this.variations);
     this._initClara();
   }
 
@@ -57,8 +59,9 @@ class claraConfigurator {
 (function() {
   var opts = {
     playerDivId       : 'clara-player',
+    configuratorDivId : 'panel-embed',
     claraSceneId      : php_vars.clarauuid,
-    configuratorDivId : 'panel-embed'
+    variations        : php_vars.variations
   };
   var cc = new claraConfigurator(opts);
 
