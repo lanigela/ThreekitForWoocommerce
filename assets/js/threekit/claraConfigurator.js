@@ -51,7 +51,9 @@ class claraConfigurator {
             el    : configuratorEl
           });
 
-          self.api.on('configurationChange', self._onConfigurationChange());
+          self.api.on('configurationChange', (ev) => {
+            self._onConfigurationChange();
+          });
         }
       });
   }
