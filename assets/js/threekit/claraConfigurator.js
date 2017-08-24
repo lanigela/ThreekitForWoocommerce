@@ -65,7 +65,7 @@ class claraConfigurator {
     configuratorDivId     : 'panel-embed',
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
-    attributes            : php_vars.attributes;
+    attributes            : php_vars.attributes
   };
   var cc = new claraConfigurator(opts);
 
