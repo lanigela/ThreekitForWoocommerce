@@ -43,9 +43,12 @@ class ThreeKit {
 
     // generate varations JSON config
     $variations = $product->get_available_variations();
-    foreach ( $variations as $voption) {
+    $test = $product->get_variation_attributes();
+    $logger->debug(var_dump($variations), $context);
+    $logger->debug(var_dump($test), $context);
+    /*foreach ( $variations as $voption) {
       $logger->debug('Variation ' . print_r($voption), $context);
-    }
+    }*/
   }
 
   public function embed_clara_player() {
