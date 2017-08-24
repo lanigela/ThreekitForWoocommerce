@@ -85,8 +85,8 @@ class claraConfigurator {
 
     // check if config attribute name and value exist for the current product
     var additionalAttrs = [];
-    var attribute_keys = this.attributes.keys();
-    var config_keys = cofig.keys();
+    var attribute_keys = Object.keys(this.attributes);
+    var config_keys = Object.keys(config);
 
     if (cofig_keys.length < attribute_keys.length) {
       console.warn("Threekit attribute number is smaller than in WooCommerce, product will not be able to added to cart");
