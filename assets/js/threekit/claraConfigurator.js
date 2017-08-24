@@ -85,25 +85,22 @@ class claraConfigurator {
 
     // check if config attribute name and value exist for the current product
     var additionalAttrs = [];
-    var attribute_keys = Object.keys(this.attributes);
-    var config_keys = Object.keys(config);
-
-    if (config_keys.length < attribute_keys.length) {
+    if (Object.keys(this.attributes).length < Object.keys(config).length) {
       console.warn("Threekit attribute number is smaller than in WooCommerce, product will not be able to added to cart");
     }
     for (var key in config) {
-      // looking for "key" in attribute_keys
+      // looking for "key" in attributes
       var found = false;
       var legal = true;
-      for (var ele in attribute_keys) {
+      for (var ele in this.attributes) {
         // remove "pa_"
         var trimEle = ele;
         if (trimEle.startsWith('pa_')) {
           trimEle = trimEle.substr(3);
         }
-        if (self.ignoreCaseStrcmp(trimEle, key)) {
+        if (this.ignoreCaseStrcmp(trimEle, key)) {
           found = true;
-          if (!self.attributes[ele].includes(config[key])) {
+          if (!this.attributes[ele].includes(config[key])) {
             // config attribute value is illegal
             legal = false;
           }
@@ -111,7 +108,7 @@ class claraConfigurator {
         }
       }
       if (!legal) {
-        self._disableAddtocartButton();
+        this._disableAddtocartButton();
         return;
       }
       if (!found) {
