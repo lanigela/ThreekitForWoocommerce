@@ -17,11 +17,11 @@ $available_variations = $product->get_available_variations();
 
 do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-<div style="display: flex;">
+<div style="display: flex; justify-content: space-between;">
   <div id="panel-container" style="width: 60%">
     <div id="panel-embed"></div>
   </div>
-  <div id="threekit-add-to-cart" style="width: 20">
+  <div id="threekit-add-to-cart" style="width: 20%">
     <form method="post" enctype='multipart/form-data' >
       <?php do_action( 'woocommerce_before_variations_form' ); ?>
 
