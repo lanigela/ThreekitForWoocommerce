@@ -7,7 +7,13 @@ class claraConfigurator {
     this.playerDivId          = null;
     this.configuratorDivId    = null;
     this.configuratorForm     = null;
+    /*
+    *
+    */
     this.attributes           = null;
+    /*
+    *
+    */
     this.available_attributes = null;
 
     if (config) {
