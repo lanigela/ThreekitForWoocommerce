@@ -95,7 +95,7 @@ class claraConfigurator {
       // looking for "key" in attribute_keys
       var found = false;
       var legal = true;
-      attribute_keys.forEach( (ele) => {
+      for (ele in attribute_keys) {
         // remove "pa_"
         var trimEle = ele;
         if (trimEle.startsWith('pa_')) {
@@ -109,7 +109,7 @@ class claraConfigurator {
           }
           break;
         }
-      });
+      }
       if (!legal) {
         self._disableAddtocartButton();
         return;
