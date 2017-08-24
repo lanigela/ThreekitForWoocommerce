@@ -147,12 +147,11 @@ class claraConfigurator {
     return str1.toLowerCase() === str2.toLowerCase();
   }
   ignoreCaseIncludes(arr, ele) {
-    var self = this;
-    arr.forEach( (arrEle) => {
+    for (var arrEle in arr) {
       if (self.ignoreCaseStrcmp(arrEle, ele)) {
         return true;
       }
-    });
+    }
     return false;
   }
 }
