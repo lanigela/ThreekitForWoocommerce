@@ -2,11 +2,12 @@
 
 class claraConfigurator {
   constructor(config) {
-    this.api                  = null;
-    this.claraSceneId         = null;
-    this.playerDivId          = null;
-    this.configuratorDivId    = null;
-    this.configuratorForm     = null;
+    this.api                    = null;
+    this.claraSceneId           = null;
+    this.playerDivId            = null;
+    this.configuratorDivId      = null;
+    this.configuratorInputDivId = null;
+    this.configuratorForm       = null;
     /*
     *
     */
@@ -18,11 +19,12 @@ class claraConfigurator {
 
     if (config) {
       // init variables
-      this.playerDivId          = config.playerDivId;
-      this.configuratorDivId    = config.configuratorDivId;
-      this.claraSceneId         = config.claraSceneId;
-      this.attributes           = config.attributes;
-      this.available_attributes = config.available_attributes;
+      this.playerDivId            = config.playerDivId;
+      this.configuratorDivId      = config.configuratorDivId;
+      this.claraSceneId           = config.claraSceneId;
+      this.attributes             = config.attributes;
+      this.available_attributes   = config.available_attributes;
+      this.configuratorInputDivId = config.configuratorInputDivId;
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
@@ -49,7 +51,7 @@ class claraConfigurator {
             el    : configuratorEl
           });
 
-          //api.on('configurationChange', onConfigurationChange({ api }));
+          api.on('configurationChange', self._onConfigurationChange());
         }
       });
   }
@@ -63,12 +65,25 @@ class claraConfigurator {
       this.configuratorForm = forms[0].name;
     }
   }
+
+  _onConfigurationChange() {
+    var self = this;
+    var config = this.api.configuration.getConfiguration();
+    console.log(config);
+
+    var configuratorInputDiv = document.getElementById(this.configuratorInputDivId);
+    if (!configuratorInputDiv) {
+      return;
+    }
+
+  }
 }
 
 (function() {
   var opts = {
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
+    configuratorInputDivId: 'threekit-add-to-cart-inputs';
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
     attributes            : php_vars.attributes
