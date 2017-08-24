@@ -152,7 +152,7 @@ class claraConfigurator {
       if (self.ignoreCaseStrcmp(arr[iter], ele)) {
         return true;
       }
-    });
+    }
     return false;
   }
 }
