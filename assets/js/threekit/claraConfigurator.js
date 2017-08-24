@@ -116,6 +116,7 @@ class claraConfigurator {
         additionalAttrs.push(key);
       }
     }
+    this._enableAddtocartButton();
     /*
     *  Check if the product is available
     *  Attributes in WooCommerce can be overlapping,
