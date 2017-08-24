@@ -83,7 +83,7 @@ class claraConfigurator {
   var opts = {
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
-    configuratorInputDivId: 'threekit-add-to-cart-inputs';
+    configuratorInputDivId: 'threekit-add-to-cart-inputs',
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
     attributes            : php_vars.attributes
