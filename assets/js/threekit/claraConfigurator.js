@@ -29,7 +29,7 @@ class claraConfigurator {
       this.configuratorInputDivId = config.configuratorInputDivId;
       this.addtocartClassName     = config.addtocartClassName;
 
-      this.addtocartButton = document.getElementByClassName(this.addtocartClassName)[0];
+      this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
