@@ -134,7 +134,7 @@ class claraConfigurator {
           // remove "attribute_pa_"
           var trimEle = ele;
           if (trimEle.startsWith('attribute_pa_')) {
-            trimEle = trimEle.substr(12);
+            trimEle = trimEle.substr(13);
           }
           if (this.ignoreCaseStrcmp(trimEle, key)) {
             if (attrs[ele] === "" || this.ignoreCaseStrcmp(attrs[ele], config[key])) {
