@@ -177,10 +177,18 @@ class claraConfigurator {
         console.log(this.available_attributes[i].variation_id);
         this._enableAddtocartButton();
         this.variation_idInput.setAttribute('value', this.available_attributes[i].variation_id);
+
+        if (this.variationInputDiv.hasChildNodes()) {
+          // remove all child
+          while (this.variationInputDiv.firstChild) {
+            this.variationInputDiv.removeChild(this.variationInputDiv.firstChild);
+          }
+        }
         for (var key in selectedVaration) {
           var keyInput = document.createElement('input');
           keyInput.setAttribute('name', key);
           keyInput.setAttribute('value', selectedVaration[key]);
+          optionEI.setAttribute('type','hidden');
           this.variationInputDiv.appendChild(keyInput);
         }
         break;
