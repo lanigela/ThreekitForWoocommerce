@@ -10,6 +10,8 @@ class claraConfigurator {
     this.configuratorForm       = null;
     this.addtocartClassName     = null;
     this.addtocartButton        = null;
+
+    this.addtocartEnabled       = false;
     /*
     *
     */
@@ -20,6 +22,7 @@ class claraConfigurator {
     this.available_attributes = null;
 
     if (config) {
+      var self = this;
       // init variables
       this.playerDivId            = config.playerDivId;
       this.configuratorDivId      = config.configuratorDivId;
@@ -30,6 +33,11 @@ class claraConfigurator {
       this.addtocartClassName     = config.addtocartClassName;
 
       this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
+      this.addtocartButton.onclick = (ev) => {
+        if (!self.addtocartEnabled) {
+          event.preventDefault();
+        }
+      };
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
@@ -166,6 +174,7 @@ class claraConfigurator {
     if (!this.addtocartButton) {
       return;
     }
+    this.addtocartEnabled = false;
     this.addtocartButton.classList.add('disabled');
   }
 
@@ -173,6 +182,7 @@ class claraConfigurator {
     if (!this.addtocartButton) {
       return;
     }
+    addtocartEnabled = true;
     this.addtocartButton.classList.remove('disabled');
   }
 
