@@ -10,8 +10,9 @@ class claraConfigurator {
     this.configuratorForm       = null;
     this.addtocartClassName     = null;
     this.addtocartButton        = null;
-
     this.addtocartEnabled       = false;
+    this.variation_idClassName  = null;
+    this.variation_idInput      = null;
     /*
     *
     */
@@ -31,6 +32,8 @@ class claraConfigurator {
       this.available_attributes   = config.available_attributes;
       this.configuratorInputDivId = config.configuratorInputDivId;
       this.addtocartClassName     = config.addtocartClassName;
+      this.variation_idClassName  = config.variation_idClassName;
+
 
       this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
       this.addtocartButton.onclick = (ev) => {
@@ -38,6 +41,7 @@ class claraConfigurator {
           event.preventDefault();
         }
       };
+      this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
@@ -130,6 +134,7 @@ class claraConfigurator {
     *  Attributes in WooCommerce can be overlapping,
     *  using the first matching attribute in this.available_attributes
     */
+    var foundMatch = false;
     for (var i = 0; i < this.available_attributes.length; i++) {
       var attrs = this.available_attributes[i].attributes;
       if (Object.keys(attrs).length != Object.keys(config).length) {
@@ -154,16 +159,20 @@ class claraConfigurator {
         if (!found) {
           // matching fail
           match = false;
-          this._disableAddtocartButton();
           break;
         }
       }
       if (match) {
         // find a match!
+        foundMatch = true;
         console.log(this.available_attributes[i].variation_id);
         this._enableAddtocartButton();
+        this.variation_idInput.value = this.available_attributes[i].variation_id;
         break;
       }
+    }
+    if (!foundMatch) {
+      this._disableAddtocartButton();
     }
 
     // calculate price
@@ -206,6 +215,7 @@ class claraConfigurator {
 (function() {
   var opts = {
     addtocartClassName    : 'single_add_to_cart_button',
+    variation_idClassName : 'variation_id',
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
     configuratorInputDivId: 'threekit-add-to-cart-inputs',
