@@ -122,6 +122,38 @@ class claraConfigurator {
     *  Attributes in WooCommerce can be overlapping,
     *  using the first matching attribute in this.available_attributes
     */
+    for (var i = 0; i < this.available_attributes.length; i++) {
+      var attrs = this.available_attributes[i].attributes;
+      if (Object.keys(attrs).length != Object.keys(config).length) {
+        continue;
+      }
+      var match = true;
+      for (var key in config) {
+        var found = false;
+        for(var ele in attrs) {
+          // remove "attribute_pa_"
+          var trimEle = ele;
+          if (trimEle.startsWith('attribute_pa_')) {
+            trimEle = trimEle.substr(12);
+          }
+          if (this.ignoreCaseStrcmp(trimEle, key)) {
+            if (attrs[ele] === "" || this.ignoreCaseStrcmp(attrs[ele], config[key])) {
+              found = true;
+            }
+          }
+        }
+        if (!found) {
+          // matching fail
+          match = false;
+          break;
+        }
+      }
+      if (match) {
+        // find a match!
+        console.log(this.available_attributes[i].variation_id);
+        break;
+      }
+    }
 
     // calculate price
 
