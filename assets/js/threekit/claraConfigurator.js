@@ -214,6 +214,9 @@ class claraConfigurator {
     }
     this.addtocartEnabled = false;
     this.addtocartButton.classList.add('disabled');
+    if (this.priceDiv) {
+      this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>';
+    }
   }
 
   _enableAddtocartButton() {
