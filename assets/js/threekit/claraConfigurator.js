@@ -38,6 +38,7 @@ class claraConfigurator {
       this.addtocartClassName     = config.addtocartClassName;
       this.variation_idClassName  = config.variation_idClassName;
       this.variationInputId       = config.variationInputId;
+      this.priceId                = config.priceId;
 
       this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
       this.variationInputDiv = document.getElementById(this.variationInputId);
