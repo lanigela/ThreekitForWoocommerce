@@ -15,6 +15,8 @@ class claraConfigurator {
     this.variation_idInput      = null;
     this.variationInputId       = null;
     this.variationInputDiv      = null;
+    this.priceId                = null;
+    this.priceDiv               = null;
     /*
     *
     */
@@ -40,6 +42,7 @@ class claraConfigurator {
       this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
       this.variationInputDiv = document.getElementById(this.variationInputId);
       this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
+      this.priceDiv = document.getElementById(this.priceId);
 
       this.addtocartButton.onclick = (ev) => {
         if (!self.addtocartEnabled) {
@@ -174,6 +177,8 @@ class claraConfigurator {
       if (match && this.available_attributes[i].is_in_stock && this.available_attributes[i].is_purchasable) {
         // find a match!
         foundMatch = true;
+
+        this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>' + this.available_attributes[i].display_price;
         console.log(this.available_attributes[i].variation_id);
         this._enableAddtocartButton();
         this.variation_idInput.setAttribute('value', this.available_attributes[i].variation_id);
@@ -243,6 +248,7 @@ class claraConfigurator {
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
     configuratorInputDivId: 'threekit-add-to-cart-inputs',
+    priceId               : 'threekit_price',
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
     attributes            : php_vars.attributes

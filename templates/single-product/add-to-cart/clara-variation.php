@@ -28,6 +28,10 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
       <?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
       <p class="stock out-of-stock"><?php _e( 'This product is currently out of stock and unavailable.', 'woocommerce' ); ?></p>
       <?php else : ?>
+        <p class="price">
+          <span class="woocommerce-Price-amount amount" id="threekit_price">
+          </span>
+        </p>
         <div id="threekit-add-to-cart-inputs"></div>
         <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
