@@ -182,7 +182,7 @@ class claraConfigurator {
     if (!this.addtocartButton) {
       return;
     }
-    addtocartEnabled = true;
+    this.addtocartEnabled = true;
     this.addtocartButton.classList.remove('disabled');
   }
 
