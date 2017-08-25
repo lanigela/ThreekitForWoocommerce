@@ -231,7 +231,7 @@ class claraConfigurator {
   var opts = {
     addtocartClassName    : 'single_add_to_cart_button',
     variation_idClassName : 'variation_id',
-    variationInputId      : 'threekit-add-to-cart-inputs';
+    variationInputId      : 'threekit-add-to-cart-inputs',
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
     configuratorInputDivId: 'threekit-add-to-cart-inputs',
