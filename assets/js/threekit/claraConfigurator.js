@@ -171,7 +171,7 @@ class claraConfigurator {
           break;
         }
       }
-      if (match) {
+      if (match && this.available_attributes[i].is_in_stock && this.available_attributes[i].is_purchasable) {
         // find a match!
         foundMatch = true;
         console.log(this.available_attributes[i].variation_id);
