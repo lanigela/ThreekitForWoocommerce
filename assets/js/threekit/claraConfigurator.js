@@ -188,7 +188,7 @@ class claraConfigurator {
           var keyInput = document.createElement('input');
           keyInput.setAttribute('name', key);
           keyInput.setAttribute('value', selectedVaration[key]);
-          optionEI.setAttribute('type','hidden');
+          keyInput.setAttribute('type','hidden');
           this.variationInputDiv.appendChild(keyInput);
         }
         break;
