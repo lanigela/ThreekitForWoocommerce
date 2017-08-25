@@ -116,7 +116,7 @@ class claraConfigurator {
         additionalAttrs.push(key);
       }
     }
-    this._enableAddtocartButton();
+
     /*
     *  Check if the product is available
     *  Attributes in WooCommerce can be overlapping,
@@ -139,18 +139,21 @@ class claraConfigurator {
           if (this.ignoreCaseStrcmp(trimEle, key)) {
             if (attrs[ele] === "" || this.ignoreCaseStrcmp(attrs[ele], config[key])) {
               found = true;
+              break;
             }
           }
         }
         if (!found) {
           // matching fail
           match = false;
+          this._disableAddtocartButton();
           break;
         }
       }
       if (match) {
         // find a match!
         console.log(this.available_attributes[i].variation_id);
+        this._enableAddtocartButton();
         break;
       }
     }
