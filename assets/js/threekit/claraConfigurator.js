@@ -13,6 +13,8 @@ class claraConfigurator {
     this.addtocartEnabled       = false;
     this.variation_idClassName  = null;
     this.variation_idInput      = null;
+    this.variationInputId       = null;
+    this.variationInputDiv      = null;
     /*
     *
     */
@@ -33,15 +35,18 @@ class claraConfigurator {
       this.configuratorInputDivId = config.configuratorInputDivId;
       this.addtocartClassName     = config.addtocartClassName;
       this.variation_idClassName  = config.variation_idClassName;
+      this.variationInputId       = config.variationInputId;
 
-
+      this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
+      this.variationInputDiv = document.getElementById(this.variationInputId);
       this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
+
       this.addtocartButton.onclick = (ev) => {
         if (!self.addtocartEnabled) {
           event.preventDefault();
         }
       };
-      this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
+
     }
     console.log(this.attributes);
     console.log(this.available_attributes);
@@ -97,6 +102,7 @@ class claraConfigurator {
 
     // check if config attribute name and value exist for the current product
     var additionalAttrs = [];
+    var attrValueTobeSubmited = [];
     if (Object.keys(this.attributes).length < Object.keys(config).length) {
       console.warn("Threekit attribute number is smaller than in WooCommerce, product will not be able to added to cart");
     }
@@ -135,12 +141,14 @@ class claraConfigurator {
     *  using the first matching attribute in this.available_attributes
     */
     var foundMatch = false;
+    var selectedVaration = {};
     for (var i = 0; i < this.available_attributes.length; i++) {
       var attrs = this.available_attributes[i].attributes;
       if (Object.keys(attrs).length != Object.keys(config).length) {
         continue;
       }
       var match = true;
+      selectedVaration = {};
       for (var key in config) {
         var found = false;
         for(var ele in attrs) {
@@ -152,6 +160,7 @@ class claraConfigurator {
           if (this.ignoreCaseStrcmp(trimEle, key)) {
             if (attrs[ele] === "" || this.ignoreCaseStrcmp(attrs[ele], config[key])) {
               found = true;
+              selectedVaration[ele] = config[key].toLowerCase();
               break;
             }
           }
@@ -167,7 +176,13 @@ class claraConfigurator {
         foundMatch = true;
         console.log(this.available_attributes[i].variation_id);
         this._enableAddtocartButton();
-        this.variation_idInput.value = this.available_attributes[i].variation_id;
+        this.variation_idInput.setAttribute('value', this.available_attributes[i].variation_id);
+        for (var key in selectedVaration) {
+          var keyInput = document.createElement('input');
+          keyInput.setAttribute('name', key);
+          keyInput.setAttribute('value', selectedVaration[key]);
+          this.variationInputDiv.appendChild(keyInput);
+        }
         break;
       }
     }
@@ -216,6 +231,7 @@ class claraConfigurator {
   var opts = {
     addtocartClassName    : 'single_add_to_cart_button',
     variation_idClassName : 'variation_id',
+    variationInputId      : 'threekit-add-to-cart-inputs';
     playerDivId           : 'clara-player',
     configuratorDivId     : 'panel-embed',
     configuratorInputDivId: 'threekit-add-to-cart-inputs',
