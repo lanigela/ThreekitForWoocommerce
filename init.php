@@ -22,18 +22,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Check if WooCommerce is active
  **/
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+
 
 $active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
 
   foreach ( $active_plugins as $key => $active_plugin ) {
-    echo $active_plugin;
-    if ( strstr( $active_plugin, '/woocommerce-product-addons.php' ) ) {
+    echo $active_plugin . "\n";
 
-    }
   }
   if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
     echo "bbbbbbb";
@@ -45,7 +42,7 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
     add_action('init', 'threekit_for_woocommerce_init');
   }
 }
-}
+
 
 if (!function_exists('threekit_for_woocommerce_init')) {
   function threekit_for_woocommerce_init() {
