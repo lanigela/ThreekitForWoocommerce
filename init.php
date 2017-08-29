@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
-  if (in_array( '/woocommerce-product-addons.php', $active_plugins )) {
+  if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
     $logger = wc_get_logger();
     $context = array( 'source' => 'Threekit-for-WooCommerce' );
 
