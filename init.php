@@ -22,6 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Check if WooCommerce is active
  **/
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+
 $active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
@@ -42,6 +45,7 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
     define('THREEKIT_FOR_WOOCOMMERCE_DIR', rtrim(plugin_dir_path(__FILE__),'/'));
     add_action('init', 'threekit_for_woocommerce_init');
   }
+}
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
