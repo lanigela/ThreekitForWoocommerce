@@ -25,9 +25,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 $active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
+  $logger = wc_get_logger();
+  $context = array( 'source' => 'Threekit-for-WooCommerce' );
+  foreach ( $active_plugins as $key => $active_plugin ) {
+    $logger->debug( $active_plugin, $context );
+    if ( strstr( $active_plugin, '/woocommerce-product-addons.php' ) ) {
+        $logger->debug( 'goal!', $context );
+    }
+  }
   if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
-    $logger = wc_get_logger();
-    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+
 
     $logger->debug( 'addon enabled', $context );
   }
