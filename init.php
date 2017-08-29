@@ -35,9 +35,10 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   }
 
   if ($using_addons) {
-    echo "bbbbbbb";
+    // using addons for configuration
   }
   else {
+    // using default variation for configuration
     define('THREEKIT_FOR_WOOCOMMERCE_DIR', rtrim(plugin_dir_path(__FILE__),'/'));
     add_action('init', 'threekit_for_woocommerce_init');
   }
