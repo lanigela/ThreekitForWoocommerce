@@ -27,15 +27,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 $active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
-
+  $using_addons = false;
   foreach ( $active_plugins as $key => $active_plugin ) {
-    echo $active_plugin . "\n";
-
+    if ( strstr( $active_plugin, 'woocommerce-product-addons.php' ) ) {
+      $using_addons = true;
+    }
   }
-  if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
+
+  if ($using_addons) {
     echo "bbbbbbb";
-
-
   }
   else {
     define('THREEKIT_FOR_WOOCOMMERCE_DIR', rtrim(plugin_dir_path(__FILE__),'/'));
