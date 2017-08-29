@@ -22,10 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Check if WooCommerce is active
  **/
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
+if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
-  define('THREEKIT_FOR_WOOCOMMERCE_DIR', rtrim(plugin_dir_path(__FILE__),'/'));
-  add_action('init', 'threekit_for_woocommerce_init');
+  if (in_array( '/woocommerce-product-addons.php', $active_plugins )) {
+    $logger = wc_get_logger();
+    $context = array( 'source' => 'Threekit-for-WooCommerce' );
+
+    $logger->debug( 'addon enabled', $context );
+  }
+  else {
+    define('THREEKIT_FOR_WOOCOMMERCE_DIR', rtrim(plugin_dir_path(__FILE__),'/'));
+    add_action('init', 'threekit_for_woocommerce_init');
+  }
 }
 
 if (!function_exists('threekit_for_woocommerce_init')) {
