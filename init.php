@@ -30,9 +30,9 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   // Put your plugin code here
 
   foreach ( $active_plugins as $key => $active_plugin ) {
-    $logger->debug( $active_plugin, $context );
+    echo $active_plugin;
     if ( strstr( $active_plugin, '/woocommerce-product-addons.php' ) ) {
-        echo $active_plugin;
+
     }
   }
   if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
