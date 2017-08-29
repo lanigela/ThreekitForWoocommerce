@@ -36,7 +36,7 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
     }
   }
   if (in_array( 'woocommerce/woocommerce-product-addons.php', $active_plugins )) {
-    echo "bbbbbbb"
+    echo "bbbbbbb";
 
 
   }
