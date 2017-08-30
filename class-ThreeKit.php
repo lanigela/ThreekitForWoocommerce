@@ -25,17 +25,12 @@ class ThreeKit {
 
   public function enable_threekit_by_checking_clarauuid_attribute() {
     global $product;
-    $logger = wc_get_logger();
-    $context = array( 'source' => 'Threekit-for-WooCommerce' );
-
-    $logger->debug( 'Product id='.$product->get_id(), $context );
-
     $product_type = $product->get_type();
 
     // only works for variable product for now
-    // if (strcmp($product_type, 'variable')) {
-    //   return;
-    // }
+    if (strcmp($product_type, 'variable')) {
+      return;
+    }
 
     $attributes = $product->get_attributes();
 
@@ -44,7 +39,6 @@ class ThreeKit {
       if (!strcmp($attribute_name, 'pa_clarauuid')) {
         $this->clarauuid = $product->get_attribute($attribute_name);
         if (!empty($this->clarauuid)) {
-          $logger->debug( "Threekit plugin enabled", $context );
 
           // generate varations JSON config
           $this->JSONConfig = $this->variation_attributes_to_JSON($product->get_available_variations());
