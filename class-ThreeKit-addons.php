@@ -44,6 +44,16 @@ class ThreeKitAddons extends ThreeKit {
   }
 
   public function embed_clara_configurator() {
+    global $product;
+
+    if ( ! $post_id ) {
+      global $post;
+      $post_id = $post->ID;
+    }
+
+    $product_addons = get_product_addons( $post_id );
+    var_dump($product_addons);
+
     // load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
 
     // // load scripts to init clara player
