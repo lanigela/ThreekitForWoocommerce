@@ -33,9 +33,9 @@ class ThreeKit {
     $product_type = $product->get_type();
 
     // only works for variable product for now
-    if (strcmp($product_type, 'variable')) {
-      return;
-    }
+    // if (strcmp($product_type, 'variable')) {
+    //   return;
+    // }
 
     $attributes = $product->get_attributes();
 
