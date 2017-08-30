@@ -39,6 +39,7 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   if ($using_addons) {
     // using addons for configuration
     add_action('init', 'threekit_addons_for_woocommerce_init');
+    echo 'using addons';
   }
   else {
     // using default variation for configuration
