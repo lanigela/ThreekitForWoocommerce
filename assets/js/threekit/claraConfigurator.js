@@ -148,7 +148,7 @@ class claraConfigurator {
               }
             break;
             case 'custom':
-              selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]' = config[key];
+              selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
             break;
           }
         }
