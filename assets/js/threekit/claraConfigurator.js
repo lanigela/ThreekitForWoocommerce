@@ -57,15 +57,8 @@ class claraConfigurator {
       }
 
     }
-    console.log(this.attributes);
 
-    if (this.usingAddons) {
-
-    }
-    else {
-      this._initClara();
-    }
-
+    this._initClara();
   }
 
   _initClara() {
@@ -88,9 +81,17 @@ class claraConfigurator {
             el    : configuratorEl
           });
 
-          self.api.on('configurationChange', (ev) => {
-            self._onConfigurationChange();
-          });
+          if (self.usingAddons) {
+            self.api.on('configurationChange', (ev) => {
+              self._onConfigurationChangeAddon();
+            });
+          }
+          else {
+            self.api.on('configurationChange', (ev) => {
+              self._onConfigurationChange();
+            });
+          }
+
         }
       });
   }
@@ -103,6 +104,13 @@ class claraConfigurator {
     if (forms.length > 0) {
       this.configuratorForm = forms[0].name;
     }
+  }
+
+  _onConfigurationChangeAddon() {
+    var self = this;
+    var config = this.api.configuration.getConfiguration();
+    console.log(config);
+    console.log(this.attributes);
   }
 
   _onConfigurationChange() {
