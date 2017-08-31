@@ -38,6 +38,11 @@ class ThreeKitAddons extends ThreeKit {
 
           // load template
           $this->replace_product_template_with_clara();
+          // remove addons templates
+          $Product_Addon_Display = $GLOBALS['Product_Addon_Display'];
+          remove_action( 'woocommerce_before_add_to_cart_button', array( $Product_Addon_Display, 'display' ), 10 );
+          remove_action( 'woocommerce_before_variations_form', array( $Product_Addon_Display, 'reposition_display_for_variable_product' ), 10 );
+          remove_action( 'woocommerce-product-addons_end', array( $Product_Addon_Display, 'totals' ), 10 );
         }
       }
     }
