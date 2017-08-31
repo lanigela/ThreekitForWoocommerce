@@ -133,8 +133,8 @@ class claraConfigurator {
                 if (config[key] === this.attributes[ele].options[opt].label) {
                   optionFound = true;
                   // add input to form
-                  var tailNumber = opt + 1;
-                  selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + tailNumber;
+                  var tailNumber =  parseInt(opt) + 1;
+                  selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + '-' + tailNumber;
                   // calculate price
                 }
               }
