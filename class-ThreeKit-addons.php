@@ -54,17 +54,18 @@ class ThreeKitAddons extends ThreeKit {
     $product_addons = get_product_addons( $post_id );
     var_dump($product_addons);
 
-    // load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
+    load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
 
-    // // load scripts to init clara player
-    // wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
-    // $dataToBePassed = array(
-    //   'clarauuid' => $this->clarauuid,
-    //   'available_attributes' => $this->JSONConfig,
-    //   'attributes' => $this->attributes
-    // );
-    // // variables will be json encoded here
-    // wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
+    // load scripts to init clara player
+    wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
+    $dataToBePassed = array(
+      'clarauuid' => $this->clarauuid,
+      'available_attributes' => $this->JSONConfig,
+      'attributes' => $product_addons,
+      'usingAddons' => true
+    );
+    // variables will be json encoded here
+    wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);
   }
 }
 

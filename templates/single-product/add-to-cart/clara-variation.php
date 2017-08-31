@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
-$available_variations = $product->get_available_variations();
+$variation_in_stock = strcmp($product->get_type(), 'variable') ? true : !empty($product->get_available_variations()) ;
 
 do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
@@ -25,7 +25,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
     <form method="post" enctype='multipart/form-data' >
       <?php do_action( 'woocommerce_before_variations_form' ); ?>
 
-      <?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
+      <?php if ( variation_in_stock ) : ?>
       <p class="stock out-of-stock"><?php _e( 'This product is currently out of stock and unavailable.', 'woocommerce' ); ?></p>
       <?php else : ?>
         <p class="price">

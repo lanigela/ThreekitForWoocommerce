@@ -64,7 +64,8 @@ class ThreeKit {
     $dataToBePassed = array(
       'clarauuid' => $this->clarauuid,
       'available_attributes' => $this->JSONConfig,
-      'attributes' => $this->attributes
+      'attributes' => $this->attributes,
+      'usingAddons' => false
     );
     // variables will be json encoded here
     wp_localize_script('claraConfigurator', 'php_vars', $dataToBePassed);

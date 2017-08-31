@@ -26,6 +26,8 @@ class claraConfigurator {
     */
     this.available_attributes = null;
 
+    this.usingAddons          = false;
+
     if (config) {
       var self = this;
       // init variables
@@ -39,6 +41,7 @@ class claraConfigurator {
       this.variation_idClassName  = config.variation_idClassName;
       this.variationInputId       = config.variationInputId;
       this.priceId                = config.priceId;
+      this.usingAddons            = config.usingAddons;
 
       this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
       this.variationInputDiv = document.getElementById(this.variationInputId);
@@ -53,8 +56,14 @@ class claraConfigurator {
 
     }
     console.log(this.attributes);
-    console.log(this.available_attributes);
-    this._initClara();
+
+    if (this.usingAddons) {
+
+    }
+    else {
+      this._initClara();
+    }
+
   }
 
   _initClara() {
@@ -255,7 +264,8 @@ class claraConfigurator {
     priceId               : 'threekit_price',
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
-    attributes            : php_vars.attributes
+    attributes            : php_vars.attributes,
+    usingAddons           : php_vars.usingAddons
   };
   var cc = new claraConfigurator(opts);
 
