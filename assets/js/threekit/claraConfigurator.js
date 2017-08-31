@@ -111,6 +111,67 @@ class claraConfigurator {
     var config = this.api.configuration.getConfiguration();
     console.log(config);
     console.log(this.attributes);
+
+    var configuratorInputDiv = document.getElementById(this.configuratorInputDivId);
+    if (!configuratorInputDiv) {
+      return;
+    }
+
+    var selectedVaration = {};
+
+    for (var key in config) {
+      // looking for key in attributes
+      var nameFound = false;
+      for (var ele in this.attributes) {
+        nameFound = true;
+        if (key === this.attributes[ele].name) {
+          switch (this.attributes[ele].type) {
+            case 'select':
+              // looking for config[key] in attributes[ele].options
+              var optionFound = false;
+              for (var opt in this.attributes[ele].options) {
+                if (config[key] === this.attributes[ele].options[opt].label) {
+                  optionFound = true;
+                  // add input to form
+                  var tailNumber = opt + 1;
+                  selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + tailNumber;
+                  // calculate price
+                }
+              }
+              if ( !optionFound ) {
+                console.warn("Option " + config[key] + " not found in " + key);
+              }
+            break;
+            case 'checkbox':
+              if (config[key]) {
+                selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
+              }
+            break;
+            case 'custom':
+              selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]' = config[key];
+            break;
+          }
+        }
+      }
+      if (!nameFound) {
+        console.warn("Configuration " + key + " not found, unable to post to server");
+      }
+    }
+
+    if (this.variationInputDiv.hasChildNodes()) {
+      // remove all child
+      while (this.variationInputDiv.firstChild) {
+        this.variationInputDiv.removeChild(this.variationInputDiv.firstChild);
+      }
+    }
+
+    for (var key in selectedVaration) {
+      var keyInput = document.createElement('input');
+      keyInput.setAttribute('name', key);
+      keyInput.setAttribute('value', selectedVaration[key]);
+      keyInput.setAttribute('type','hidden');
+      this.variationInputDiv.appendChild(keyInput);
+    }
   }
 
   _onConfigurationChange() {
