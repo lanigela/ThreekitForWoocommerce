@@ -25,7 +25,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
     <form method="post" enctype='multipart/form-data' >
       <?php do_action( 'woocommerce_before_variations_form' ); ?>
 
-      <?php if ( variation_in_stock ) : ?>
+      <?php if ( !variation_in_stock ) : ?>
       <p class="stock out-of-stock"><?php _e( 'This product is currently out of stock and unavailable.', 'woocommerce' ); ?></p>
       <?php else : ?>
         <p class="price">
