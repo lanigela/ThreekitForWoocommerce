@@ -39,7 +39,6 @@ if ( in_array( 'woocommerce/woocommerce.php', $active_plugins) ) {
   if ($using_addons) {
     // using addons for configuration
     add_action('init', 'threekit_addons_for_woocommerce_init');
-    echo 'using addons';
   }
   else {
     // using default variation for configuration
@@ -62,7 +61,8 @@ if (!function_exists('threekit_addons_for_woocommerce_init')) {
     require_once THREEKIT_FOR_WOOCOMMERCE_DIR . '/class-ThreeKit-addons.php';
     $api = new ThreeKitAddons();
 
-    add_action('woocommerce_before_single_product', array($api, 'enable_threekit_by_checking_clarauuid_attribute'));
+    // using a low priority number to make sure running after woocommerce-addons
+    add_action('woocommerce_before_single_product', array($api, 'enable_threekit_by_checking_clarauuid_attribute'), 100);
   }
 }
 
