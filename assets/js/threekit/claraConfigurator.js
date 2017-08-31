@@ -48,6 +48,11 @@ class claraConfigurator {
       this.addtocartButton = document.getElementsByClassName(this.addtocartClassName)[0];
       this.priceDiv = document.getElementById(this.priceId);
 
+
+      if (this.usingAddons) {
+        this.addtocartEnabled = true;
+      }
+
       if (this.addtocartButton) {
         this.addtocartButton.onclick = (ev) => {
           if (!self.addtocartEnabled) {
@@ -55,6 +60,8 @@ class claraConfigurator {
           }
         };
       }
+
+
 
     }
 
