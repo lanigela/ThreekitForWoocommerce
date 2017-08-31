@@ -52,7 +52,7 @@ class ThreeKitAddons extends ThreeKit {
     }
 
     $product_addons = get_product_addons( $post_id );
-    var_dump($product_addons);
+
 
     load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
 
