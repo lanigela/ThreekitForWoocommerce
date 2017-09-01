@@ -147,7 +147,7 @@ class claraConfigurator {
                   selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + '-' + tailNumber;
                   // calculate price
                   var cPrice = parseInt(this.attributes[ele].options[opt].price);
-                  if (cPrice != NaN) {
+                  if (!isNaN(cPrice)) {
                     price += cPrice;
                   }
                 }
@@ -160,7 +160,7 @@ class claraConfigurator {
               if (config[key] && this.attributes[ele].options.length > 0) {
                 selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
                 var cPrice = parseInt(this.attributes[ele].options[0].price);
-                if (cPrice != NaN) {
+                if (!isNaN(cPrice)) {
                   price += cPrice;
                 }
               }
@@ -169,7 +169,7 @@ class claraConfigurator {
               if ( this.attributes[ele].options.length > 0 ) {
                 selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
                 var cPrice = parseInt(this.attributes[ele].options[0].price);
-                  if (cPrice != NaN) {
+                if (!isNaN(cPrice)) {
                   price += cPrice;
                 }
               }
