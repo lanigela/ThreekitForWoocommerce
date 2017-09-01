@@ -67,7 +67,7 @@ class ThreeKitAddons extends ThreeKit {
       'clarauuid' => $this->clarauuid,
       'available_attributes' => $this->JSONConfig,
       'attributes' => $product_addons,
-      'base_price' => $product->get_price(),
+      'basePrice' => $product->get_price(),
       'usingAddons' => true
     );
     // variables will be json encoded here

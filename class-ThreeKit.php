@@ -65,6 +65,7 @@ class ThreeKit {
       'clarauuid' => $this->clarauuid,
       'available_attributes' => $this->JSONConfig,
       'attributes' => $this->attributes,
+      'basePrice' => $product->get_price(),
       'usingAddons' => false
     );
     // variables will be json encoded here
