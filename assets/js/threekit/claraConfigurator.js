@@ -17,6 +17,7 @@ class claraConfigurator {
     this.variationInputDiv      = null;
     this.priceId                = null;
     this.priceDiv               = null;
+    this.basePrice              = 0;
     /*
     *
     */
@@ -42,6 +43,7 @@ class claraConfigurator {
       this.variationInputId       = config.variationInputId;
       this.priceId                = config.priceId;
       this.usingAddons            = config.usingAddons;
+      this.basePrice              = parseInt(config.basePrice);
 
       this.variation_idInput = document.getElementsByClassName(this.variation_idClassName)[0];
       this.variationInputDiv = document.getElementById(this.variationInputId);
@@ -144,7 +146,7 @@ class claraConfigurator {
                   var tailNumber =  parseInt(opt) + 1;
                   selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + '-' + tailNumber;
                   // calculate price
-                  var cPrice = this.attributes[ele].options[opt].price;
+                  var cPrice = parseInt(this.attributes[ele].options[opt].price);
                   if (cPrice != NaN) {
                     price += cPrice;
                   }
@@ -157,7 +159,7 @@ class claraConfigurator {
             case 'checkbox':
               if (config[key]) {
                 selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
-                var cPrice = this.attributes[ele].options[opt].price;
+                var cPrice = parseInt(this.attributes[ele].options[opt].price);
                 if (cPrice != NaN) {
                   price += cPrice;
                 }
@@ -165,7 +167,7 @@ class claraConfigurator {
             break;
             case 'custom':
               selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
-              var cPrice = this.attributes[ele].options[opt].price;
+              var cPrice = parseInt(this.attributes[ele].options[opt].price);
                 if (cPrice != NaN) {
                 price += cPrice;
               }
@@ -195,7 +197,7 @@ class claraConfigurator {
     }
 
     // update display price
-    this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>' + price.toString();
+    this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>' + (this.basePrice + price).toString();
   }
 
   _onConfigurationChange() {
@@ -360,6 +362,7 @@ class claraConfigurator {
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
     attributes            : php_vars.attributes,
+    basePrice             : basePrice,
     usingAddons           : php_vars.usingAddons
   };
   var cc = new claraConfigurator(opts);
