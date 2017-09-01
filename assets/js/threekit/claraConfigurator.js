@@ -362,7 +362,7 @@ class claraConfigurator {
     claraSceneId          : php_vars.clarauuid,
     available_attributes  : php_vars.available_attributes,
     attributes            : php_vars.attributes,
-    basePrice             : basePrice,
+    basePrice             : php_vars.basePrice,
     usingAddons           : php_vars.usingAddons
   };
   var cc = new claraConfigurator(opts);
