@@ -157,19 +157,21 @@ class claraConfigurator {
               }
             break;
             case 'checkbox':
-              if (config[key]) {
+              if (config[key] && this.attributes[ele].options.length > 0) {
                 selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
-                var cPrice = parseInt(this.attributes[ele].options[opt].price);
+                var cPrice = parseInt(this.attributes[ele].options[0].price);
                 if (cPrice != NaN) {
                   price += cPrice;
                 }
               }
             break;
             case 'custom':
-              selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
-              var cPrice = parseInt(this.attributes[ele].options[opt].price);
-                if (cPrice != NaN) {
-                price += cPrice;
+              if ( this.attributes[ele].options.length > 0 ) {
+                selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
+                var cPrice = parseInt(this.attributes[ele].options[0].price);
+                  if (cPrice != NaN) {
+                  price += cPrice;
+                }
               }
             break;
           }
