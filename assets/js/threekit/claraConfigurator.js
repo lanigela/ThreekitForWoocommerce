@@ -115,6 +115,7 @@ class claraConfigurator {
 
   _onConfigurationChangeAddon() {
     var self = this;
+    var price  = 0;
     var config = this.api.configuration.getConfiguration();
     console.log(config);
     console.log(this.attributes);
@@ -143,6 +144,10 @@ class claraConfigurator {
                   var tailNumber =  parseInt(opt) + 1;
                   selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + '-' + tailNumber;
                   // calculate price
+                  var cPrice = this.attributes[ele].options[opt].price;
+                  if (cPrice != NaN) {
+                    price += cPrice;
+                  }
                 }
               }
               if ( !optionFound ) {
@@ -152,10 +157,18 @@ class claraConfigurator {
             case 'checkbox':
               if (config[key]) {
                 selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
+                var cPrice = this.attributes[ele].options[opt].price;
+                if (cPrice != NaN) {
+                  price += cPrice;
+                }
               }
             break;
             case 'custom':
               selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
+              var cPrice = this.attributes[ele].options[opt].price;
+                if (cPrice != NaN) {
+                price += cPrice;
+              }
             break;
           }
         }
@@ -172,13 +185,17 @@ class claraConfigurator {
       }
     }
 
+    // update form
     for (var key in selectedVaration) {
       var keyInput = document.createElement('input');
       keyInput.setAttribute('name', key);
-      keyInput.setAttribute('value', selectedVaration[key]);
+      keyInput.setAttribute('value', selectedVaration[key].replace(/ /g, '-'));
       keyInput.setAttribute('type','hidden');
       this.variationInputDiv.appendChild(keyInput);
     }
+
+    // update display price
+    this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>' + price.toString();
   }
 
   _onConfigurationChange() {
@@ -302,7 +319,7 @@ class claraConfigurator {
     this.addtocartEnabled = false;
     this.addtocartButton.classList.add('disabled');
     if (this.priceDiv) {
-      this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol">$</span>';
+      this.priceDiv.innerHTML = '<span class="woocommerce-Price-currencySymbol"></span>';
     }
   }
 
