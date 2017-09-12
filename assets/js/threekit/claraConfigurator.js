@@ -96,7 +96,6 @@ class claraConfigurator {
                 handle: (ev) => {
                   ev.deltaY=0;
                   if(handleFn) handleFn(ev);
-                  if(!this.state.moved)this.setState({moved: true});
                 }
               };
             }
