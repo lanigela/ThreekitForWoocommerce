@@ -99,8 +99,7 @@ class claraConfigurator {
                   if(!this.state.moved)this.setState({moved: true});
                 }
               };
-            },
-            mousedown: (ev) => this.startSpin()
+            }
         }, 'rotate');
 
         // use the first form in the scene
