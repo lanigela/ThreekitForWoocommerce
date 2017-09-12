@@ -128,6 +128,9 @@ class claraConfigurator {
 
         }
       });
+
+    this.api.commands.runCommand('rotate');
+    this.api.commands.updateCommand('orbit', {enabled: false, active:true});
   }
 
   _getConfiguratorForm() {
