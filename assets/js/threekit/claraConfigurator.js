@@ -78,6 +78,31 @@ class claraConfigurator {
       .fetchAndUse(this.claraSceneId, null, { waitForPublish: true })
       .then(() => {
 
+        // disable tool icons
+        self.api.player.removeTool('pan');
+        self.api.player.removeTool('zoom');
+        self.api.player.removeTool('home');
+        self.api.player.removeTool('fullscreen');
+        self.api.commands.removeCommand('vrMode');
+
+        // limit rotaion
+        clara.player.addTool({
+            drag: (ev) => {
+              const orbitTool = clara._store.getState().getIn(['commands', 'all']).orbit;
+              const handleFn = orbitTool.tool.drag.call(orbitTool, ev).handle;
+
+              return {
+                momentum: true,
+                handle: (ev) => {
+                  ev.deltaY=0;
+                  if(handleFn) handleFn(ev);
+                  if(!this.state.moved)this.setState({moved: true});
+                }
+              };
+            },
+            mousedown: (ev) => this.startSpin()
+        }, 'rotate');
+
         // use the first form in the scene
         self._getConfiguratorForm();
 
