@@ -86,9 +86,9 @@ class claraConfigurator {
         self.api.commands.removeCommand('vrMode');
 
         // limit rotaion
-        clara.player.addTool({
+        self.api.player.addTool({
             drag: (ev) => {
-              const orbitTool = clara._store.getState().getIn(['commands', 'all']).orbit;
+              const orbitTool = self.api._store.getState().getIn(['commands', 'all']).orbit;
               const handleFn = orbitTool.tool.drag.call(orbitTool, ev).handle;
 
               return {
