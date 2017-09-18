@@ -64,6 +64,8 @@ class ThreeKitAddons extends ThreeKit {
     // load react app and css
     wp_enqueue_style('reactcss', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/css/main.css');
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/main.js');
+    wp_enqueue_script( 'claraConfigurator', '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css');
+
 
     // load scripts to init clara player
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
