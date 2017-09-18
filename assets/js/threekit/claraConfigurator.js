@@ -239,6 +239,7 @@ class claraConfigurator {
       keyInput.setAttribute('name', key);
       keyInput.setAttribute('value', selectedVaration[key].replace(/ /g, '-'));
       keyInput.setAttribute('type','hidden');
+      console.log(keyInput);
       this.variationInputDiv.appendChild(keyInput);
     }
 
