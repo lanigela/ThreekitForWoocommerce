@@ -68,6 +68,16 @@ class claraConfigurator {
     }
 
     //this._initClara();
+    if (this.usingAddons) {
+      this.api.on('configurationChange', (ev) => {
+        this._onConfigurationChangeAddon();
+      });
+    }
+    else {
+      this.api.on('configurationChange', (ev) => {
+        this._onConfigurationChange();
+      });
+    }
   }
 
   _initClara() {
