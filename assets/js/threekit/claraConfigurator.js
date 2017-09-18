@@ -68,6 +68,7 @@ class claraConfigurator {
     }
 
     //this._initClara();
+    this.api = window.clara.api;
     if (this.usingAddons) {
       this.api.on('configurationChange', (ev) => {
         this._onConfigurationChangeAddon();
