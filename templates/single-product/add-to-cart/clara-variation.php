@@ -49,12 +49,12 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
              * @hooked woocommerce_single_variation_add_to_cart_button - 20 Qty and cart button.
              */
             //do_action( 'woocommerce_single_variation' );
-
+          ?>
             <button type="submit" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
             <input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
             <input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
             <input type="hidden" name="variation_id" class="variation_id" value="0" />
-
+          <?php
             /**
              * woocommerce_after_single_variation Hook.
              */
