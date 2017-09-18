@@ -61,6 +61,10 @@ class ThreeKitAddons extends ThreeKit {
 
     load_template(rtrim(plugin_dir_path(__FILE__),'/') . '/templates/single-product/add-to-cart/clara-variation.php');
 
+    // load react app and css
+    wp_enqueue_style('reactcss', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/css/main.css');
+    wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/main.js');
+
     // load scripts to init clara player
     wp_enqueue_script( 'claraConfigurator', rtrim(plugin_dir_url(__FILE__),'/') . '/assets/js/threekit/claraConfigurator.js');
     $dataToBePassed = array(

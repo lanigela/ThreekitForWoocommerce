@@ -67,7 +67,7 @@ class claraConfigurator {
 
     }
 
-    this._initClara();
+    //this._initClara();
   }
 
   _initClara() {
