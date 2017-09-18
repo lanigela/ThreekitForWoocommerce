@@ -207,7 +207,7 @@ class claraConfigurator {
                 // if it's color, make it a string
                 const claraAttrs = this.api.configuration.getAttribute(key);
                 if (claraAttrs.type === 'Color') {
-                  selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = 'R: '+config[key].r+' G: '+config[key].g+' B: 'config[key].b;
+                  selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = 'R: '+config[key].r+' G: '+config[key].g+' B: '+config[key].b;
                 }
                 else {
                   selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
