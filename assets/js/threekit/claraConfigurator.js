@@ -153,11 +153,9 @@ class claraConfigurator {
   }
 
   _onConfigurationChangeAddon() {
-    var self = this;
     var price  = 0;
-    var config = this.api.configuration.getConfiguration();
-    console.log(config);
-    console.log(this.attributes);
+    //var config = this.api.configuration.getConfiguration();
+    const config = { Color: 'HEX Color: ' + window.HEXColor + ' RAL Color: ' + window.RALColor};
 
     var configuratorInputDiv = document.getElementById(this.configuratorInputDivId);
     if (!configuratorInputDiv) {
@@ -181,7 +179,7 @@ class claraConfigurator {
                   optionFound = true;
                   // add input to form
                   var tailNumber =  parseInt(opt) + 1;
-                  selectedVaration['addon-' + this.attributes[ele]['field-name']] = config[key].toLowerCase() + '-' + tailNumber;
+                  selectedVaration['addon-' + this.attributes[ele]['field-name']] = { type: 'select', value: config[key].toLowerCase() + '-' + tailNumber};
                   // calculate price
                   var cPrice = parseInt(this.attributes[ele].options[opt].price);
                   if (!isNaN(cPrice)) {
@@ -195,7 +193,7 @@ class claraConfigurator {
             break;
             case 'checkbox':
               if (config[key] && this.attributes[ele].options.length > 0) {
-                selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = this.attributes[ele].options[0].label;
+                selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[]'] = { type: 'checkbox', value: this.attributes[ele].options[0].label};
                 var cPrice = parseInt(this.attributes[ele].options[0].price);
                 if (!isNaN(cPrice)) {
                   price += cPrice;
@@ -205,13 +203,14 @@ class claraConfigurator {
             case 'custom':
               if ( this.attributes[ele].options.length > 0 ) {
                 // if it's color, make it a string
-                const claraAttrs = this.api.configuration.getAttribute(key);
-                if (claraAttrs.type === 'Color') {
-                  selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = 'R: '+config[key].r+' G: '+config[key].g+' B: '+config[key].b;
-                }
-                else {
-                  selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
-                }
+                // const claraAttrs = this.api.configuration.getAttribute(key);
+                // if (claraAttrs.type === 'Color') {
+                //   selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = 'R: '+config[key].r+' G: '+config[key].g+' B: '+config[key].b;
+                // }
+                // else {
+                //   selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = config[key];
+                // }
+                selectedVaration['addon-' + this.attributes[ele]['field-name'] + '[0]'] = { type: 'custom', value: config[key]};
                 var cPrice = parseInt(this.attributes[ele].options[0].price);
                 if (!isNaN(cPrice)) {
                   price += cPrice;
@@ -237,7 +236,12 @@ class claraConfigurator {
     for (var key in selectedVaration) {
       var keyInput = document.createElement('input');
       keyInput.setAttribute('name', key);
-      keyInput.setAttribute('value', selectedVaration[key].replace(/ /g, '-'));
+      if (selectedVaration[key].type === 'custom') {
+        keyInput.setAttribute('value', selectedVaration[key].value);
+      }
+      else {
+        keyInput.setAttribute('value', selectedVaration[key].value.replace(/ /g, '-'));
+      }
       keyInput.setAttribute('type','hidden');
       console.log(keyInput);
       this.variationInputDiv.appendChild(keyInput);
