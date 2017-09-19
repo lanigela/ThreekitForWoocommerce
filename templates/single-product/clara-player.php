@@ -13,6 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div id="root" style="height:600px"></div>
+<div id="root" style="height:500px"></div>
 
 
