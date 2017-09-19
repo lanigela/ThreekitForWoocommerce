@@ -156,6 +156,7 @@ class claraConfigurator {
     var price  = 0;
     //var config = this.api.configuration.getConfiguration();
     const config = { Color: 'HEX Color: ' + window.HEXColor + ' RAL Color: ' + window.RALColor};
+    console.log(config);
 
     var configuratorInputDiv = document.getElementById(this.configuratorInputDivId);
     if (!configuratorInputDiv) {
